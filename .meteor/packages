@@ -13,3 +13,4 @@ twbs:bootstrap
 fortawesome:fontawesome
 orionjs:bootstrap
 iron:router
+accounts-ui

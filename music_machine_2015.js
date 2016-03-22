@@ -1,3 +1,12 @@
+Router.configure({
+    layoutTemplate: 'ApplicationLayout'
+  });
+  // specify the top level route, the page users see when they arrive at the site
+Router.route('/', function () {
+    console.log("rendering root /");
+    this.render("navbar", {to:"header"});
+    this.render("lobby_page", {to:"main"});
+  });
 
 //This code is for everyone. Could go in common.js
 MusicMachine = new Mongo.Collection("musicMachine");
@@ -154,6 +163,33 @@ if (Meteor.isClient) {
         });
     }
   });
+
+  Meteor.startup(function () {
+
+      console.log("creating instrument tracks");
+
+      for (var i=1;i<9;i++){
+        var  t = "track"+i+".wav";
+        console.log("creating a track"+t);
+      }
+
+maxim1 = new Maxim();
+maxim2 = new Maxim();
+maxim3 = new Maxim();
+player1 = maxim1.loadFile("arp.wav");
+player1.setLooping(true);
+player2 = maxim2.loadFile("snaredrum1.wav");
+player2.setLooping(true);
+player3 = maxim3.loadFile("drums1.wav");
+player3.setLooping(true);
+
+
+        player1.volume(1);
+player1.play();
+        player2.play();
+        player3.play();
+
+});
 }
 
 if (Meteor.isServer) {

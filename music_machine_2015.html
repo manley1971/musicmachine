@@ -1,17 +1,74 @@
 <head>
-  <title>Music Machine 2015</title>
-
+  <title> Dave's Music Machine</title>
 </head>
 
 <body>
-
-  <div class="container">
-  <br>	
-	<h1>Music Machine 2015</h1>
-
-	{{> playground}}
-
-	</div>
 </body>
+
+<template name="ApplicationLayout">
+	{{> yield "header"}}
+
+	<div class="container">
+	{{> yield "main"}}
+	</div>
+</template>
+
+<!-- top level template for the nav bar -->
+<template name="navbar">
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="/">
+        Manley1971-MusicMachine
+      </a>
+    </div>
+    <div class="nav navbar-nav">
+    {{> loginButtons}}
+</div>
+  </div>
+</nav>
+</template>
+
+<!-- Top level template for the lobby page -->
+<template name="lobby_page">
+	{{> tracks}}
+</template>
+
+<template name="tracks">
+	<h2>Change the controls until you get some groovy tunes:</h2>
+	<div class="row">
+		{{> playground}}
+	</div>
+</template>
+
+<template name="track">
+<h3>foo</h3>
+</template>
+
+ 
+<template name="playground">
+
+<br><br><br>
+<!-- Remember - if you want to control functions globaly, don't declare them as var. Just name them. -->
+
+<button class="startButton">DAC</button><br><br>
+<br>Track 1             <button class="myButton1">ON</button>
+<button class="myButton2">OFF</button>
+<br>Track 2             <button class="myButton3">ON</button>
+ <button class="myButton4">OFF</button>
+<br>Track 3             <button class="myButton5">ON</button>
+ <button class="myButton6">OFF</button>
+
+ <br>
+
+
+ <h2> {{startdac}} {{drums}} {{bass}} {{arp}} </h2>
+<br>
+  <div id="slider1"></div>
+  <br>
+  Current Speed = {{sliderVal1}}
+
+
+</template>
 
 
