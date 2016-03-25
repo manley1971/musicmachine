@@ -11,8 +11,6 @@ player3 = maxim3.loadFile("drums1.wav");
 player3.setLooping(true);
 
 
-var d = {arp:player1,snare:player2,drums:player3};
-
 playDrums = function(){
 	player1.volume(1);
 }
@@ -38,18 +36,16 @@ stopArp = function(){
 }
 
 playAll = function() {
-  	player1.play();
+  player1.play();
 	player2.play();
 	player3.play();
 
 }
-
-setSpeed = function(speed) {
-
-d["arp"].speed(speed/2);
-	d["drums"].speed(speed);
-	player3.speed(speed);
-
+setVol = function(v) {
+  console.log("arpvol"+v);
+  d["arp"].speed(v);
 }
-
-
+setSpeed = function(speed) {
+  console.log("speed"+speed);
+  d["arp"].speed(speed);
+}

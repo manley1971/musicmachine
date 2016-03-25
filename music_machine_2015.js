@@ -27,7 +27,6 @@ if (Meteor.isClient) {
       if (starter) {
         if (starter.start==1) {
           playAll();
-
         }
       }
 
@@ -35,7 +34,6 @@ if (Meteor.isClient) {
     },
 
     "drums": function () {
-
       var starter = MusicMachine.findOne();
       if (starter) {
         if (starter.drums==1) {
@@ -81,15 +79,22 @@ if (Meteor.isClient) {
       return Session.get('arp');
     },
 
-   
+
 
     //don't forget the commas between each function
 //the last one doesn't have to have one!
+"sliderVal2":  function() {
+  var slider = MusicMachine.findOne();
+  if (slider) {
+      Template.instance().$('#arpvol').data('uiSlider').value(slider.arpvol);
+      setVol(slider.arpvol/50);
+      return slider.slide;
+    }
+  },
 
-
-  "sliderVal1":  function() { 
+  "sliderVal1":  function() {
     var slider = MusicMachine.findOne();
-    if (slider) { 
+    if (slider) {
         Template.instance().$('#slider1').data('uiSlider').value(slider.slide);
         setSpeed(slider.slide/50);
         return slider.slide;
@@ -150,17 +155,33 @@ if (Meteor.isClient) {
 
   Template.playground.onRendered(function() {
     $('h2').hide();
-    var handler = _.throttle(function(event, ui) {
+
+    var track1speed = _.throttle(function(event, ui) {
         var val = MusicMachine.findOne({});
         MusicMachine.update({ _id: val._id }, {$set: {slide: ui.value}});
     }, 50, { leading: false });
-    
+
     if (!this.$('#slider1').data('uiSlider')) {
         $("#slider1").slider({
-            slide: handler,
+            slide: track1speed,
             min: 0,
             max: 100
         });
+      }
+
+        var arpvol = _.throttle(function(event, ui) {
+          console.log("setting arpvol");
+            var val = MusicMachine.findOne({});
+            MusicMachine.update({ _id: val._id }, {$set: {arpvol: ui.value}});
+        }, 50, { leading: false });
+
+        if (!this.$('#arpvol').data('uiSlider')) {
+            $("#arpvol").slider({
+                slide: arpvol,
+                min: 0,
+                max: 100
+            });
+
     }
   });
 
@@ -182,12 +203,10 @@ player2 = maxim2.loadFile("snaredrum1.wav");
 player2.setLooping(true);
 player3 = maxim3.loadFile("drums1.wav");
 player3.setLooping(true);
-
-
-        player1.volume(1);
 player1.play();
-        player2.play();
+player2.play();
         player3.play();
+        d = {arp:player1,snare:player2,drums:player3};
 
 });
 }
