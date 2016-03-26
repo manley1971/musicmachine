@@ -54,10 +54,9 @@
 <button class="startButton">DAC</button><br><br>
 
 	<div class="one">
-<br>ARP             <button class="myButton1">ON</button>
-<button class="myButton2">OFF</button>
-<div class= "c"><p> speed </p><div class = "s" id="slider1"></div></div>
-<div class="c"><p> volume </p><div class = "s" id="arpvol"></div></div>
+<br>ARP speed and volume (to remove track from mix just set volume to 0)
+<div class= "c"><div class = "s" id="arpspeed"></div></div>
+<div class="c"><div class = "s" id="arpvol"></div></div>
 </div>
 
 <br>Track 2             <button class="myButton3">ON</button>
@@ -68,7 +67,7 @@
  <br>
 
 
- <h2> {{startdac}} {{drums}} {{bass}} {{arp}} </h2>
+ <h2> {{startdac}} {{drums}} {{bass}}  </h2>
 <br>
   <br>
   Current Speed = {{sliderVal1}} {{sliderVal2}}

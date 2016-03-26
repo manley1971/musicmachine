@@ -1,14 +1,14 @@
 /* CSS declarations go here */
 .s{
- width:50%;
+   width:80%;
 }
 
 .c{
-    display:inline-block;
+
 }
 .one {
   overflow:scroll;
-  height: 110px;
+  height: 170px;
   width: 85%;
   box-sizing: border-box;
   border-style: solid;
@@ -19,7 +19,7 @@
   border-left-color: #eee;
   margin: 20px;
   border: 10px;
-  box-shadow: 10px 10px 25px 20px #888888;
+  box-shadow: 4px 5px 4px 5px #888888;
 }
 
 

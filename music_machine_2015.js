@@ -23,16 +23,12 @@ if (Meteor.isClient) {
 
     "startdac": function () {
 
-      var starter = MusicMachine.findOne();
-      if (starter) {
-        if (starter.start==1) {
-          playAll();
-        }
-      }
-
+      player1.play();
+      player2.play();
+      player3.play();
       return Session.get('startdac');
     },
-
+/*dm
     "drums": function () {
       var starter = MusicMachine.findOne();
       if (starter) {
@@ -79,7 +75,7 @@ if (Meteor.isClient) {
       return Session.get('arp');
     },
 
-
+dm*/
 
     //don't forget the commas between each function
 //the last one doesn't have to have one!
@@ -87,7 +83,7 @@ if (Meteor.isClient) {
   var  mm= MusicMachine.findOne();
   if (mm) {
       Template.instance().$('#arpvol').data('uiSlider').value(mm.arpvol);
-      setVol(mm.arpvol/50);
+      setVol("arp", mm.arpvol/50);
       return mm.arpvol;
     }
   },
@@ -95,9 +91,9 @@ if (Meteor.isClient) {
   "sliderVal1":  function() {
     var mm = MusicMachine.findOne();
     if (mm) {
-        Template.instance().$('#slider1').data('uiSlider').value(mm.slide);
-        setSpeed(mm.slide/50);
-        return mm.slide;
+        Template.instance().$('#arpspeed').data('uiSlider').value(mm.arpspeed);
+        setSpeed("arp", mm.arpspeed/50);
+        return mm.arpspeed;
       }
     },
 
@@ -112,7 +108,7 @@ if (Meteor.isClient) {
       MusicMachine.update({ _id: val._id }, {$set: {start: 1}});
     },
 
-     "click button.myButton1": function () {
+  /*dm   "click button.myButton1": function () {
       Session.set('drums', 1);
       var val = MusicMachine.findOne({});
       MusicMachine.update({ _id: val._id }, {$set: {drums: 1}});
@@ -150,20 +146,20 @@ if (Meteor.isClient) {
       MusicMachine.update({ _id: val._id }, {$set: {arp: 0}});
 
     }
-
+dm*/
   });
 
   Template.playground.onRendered(function() {
     $('h2').hide();
 
-    var track1speed = _.throttle(function(event, ui) {
+    var arpspeedf = _.throttle(function(event, ui) {
         var val = MusicMachine.findOne({});
-        MusicMachine.update({ _id: val._id }, {$set: {slide: ui.value}});
+        MusicMachine.update({ _id: val._id }, {$set: {arpspeed: ui.value}});
     }, 50, { leading: false });
 
-    if (!this.$('#slider1').data('uiSlider')) {
-        $("#slider1").slider({
-            slide: track1speed,
+    if (!this.$('#arpspeed').data('uiSlider')) {
+        $("#arpspeed").slider({
+            slide: arpspeedf,
             min: 0,
             max: 100
         });
@@ -192,21 +188,27 @@ if (Meteor.isClient) {
       for (var i=1;i<9;i++){
         var  t = "track"+i+".wav";
         console.log("creating a track"+t);
+
       }
 
 maxim1 = new Maxim();
-maxim2 = new Maxim();
-maxim3 = new Maxim();
 player1 = maxim1.loadFile("arp.wav");
 player1.setLooping(true);
+player1.play();
+
+maxim2 = new Maxim();
+maxim3 = new Maxim();
+
+
 player2 = maxim2.loadFile("snaredrum1.wav");
 player2.setLooping(true);
 player3 = maxim3.loadFile("drums1.wav");
 player3.setLooping(true);
-player1.play();
+
 player2.play();
-        player3.play();
-        d = {arp:player1,snare:player2,drums:player3};
+player3.play();
+
+d = {arp:player1,snare:player2,drums:player3};
 
 });
 }
@@ -214,7 +216,7 @@ player2.play();
 if (Meteor.isServer) {
       MusicMachine.remove({});
       if (MusicMachine.find().count() === 0) {
-      MusicMachine.insert({slide: 50,arpvol:30});
+      MusicMachine.insert({arpspeed: 50,arpvol:30,startdac:1});
     }
 
 }

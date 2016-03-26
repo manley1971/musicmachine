@@ -1,16 +1,8 @@
 //playground.js
 
-maxim1 = new Maxim();
-maxim2 = new Maxim();
-maxim3 = new Maxim();
-player1 = maxim1.loadFile("arp.wav");
-player1.setLooping(true);
-player2 = maxim2.loadFile("snaredrum1.wav");
-player2.setLooping(true);
-player3 = maxim3.loadFile("drums1.wav");
-player3.setLooping(true);
 
 
+/*
 playDrums = function(){
 	player1.volume(1);
 }
@@ -34,18 +26,13 @@ playArp = function(){
 stopArp = function(){
 	player3.volume(0);
 }
+*/
 
-playAll = function() {
-  player1.play();
-	player2.play();
-	player3.play();
-
+setVol = function(track, v) {
+  console.log(" setting vol"+v + " for "+ track);
+  d[track].volume(v);
 }
-setVol = function(v) {
-  console.log("----arpvol"+v);
-  d["arp"].volume(v);
-}
-setSpeed = function(speed) {
-  console.log("speed"+speed);
-  d["arp"].speed(speed);
+setSpeed = function(track, speed) {
+  console.log("setting speed"+speed+" for "+track);
+  d[track].speed(speed);
 }
