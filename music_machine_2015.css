@@ -1,5 +1,11 @@
 /* CSS declarations go here */
+.s{
+ width:50%;
+}
 
+.c{
+    display:inline-block;
+}
 .one {
   overflow:scroll;
   height: 110px;

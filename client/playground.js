@@ -42,8 +42,8 @@ playAll = function() {
 
 }
 setVol = function(v) {
-  console.log("arpvol"+v);
-  d["arp"].speed(v);
+  console.log("----arpvol"+v);
+  d["arp"].volume(v);
 }
 setSpeed = function(speed) {
   console.log("speed"+speed);

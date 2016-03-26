@@ -84,20 +84,20 @@ if (Meteor.isClient) {
     //don't forget the commas between each function
 //the last one doesn't have to have one!
 "sliderVal2":  function() {
-  var slider = MusicMachine.findOne();
-  if (slider) {
-      Template.instance().$('#arpvol').data('uiSlider').value(slider.arpvol);
-      setVol(slider.arpvol/50);
-      return slider.slide;
+  var  mm= MusicMachine.findOne();
+  if (mm) {
+      Template.instance().$('#arpvol').data('uiSlider').value(mm.arpvol);
+      setVol(mm.arpvol/50);
+      return mm.arpvol;
     }
   },
 
   "sliderVal1":  function() {
-    var slider = MusicMachine.findOne();
-    if (slider) {
-        Template.instance().$('#slider1').data('uiSlider').value(slider.slide);
-        setSpeed(slider.slide/50);
-        return slider.slide;
+    var mm = MusicMachine.findOne();
+    if (mm) {
+        Template.instance().$('#slider1').data('uiSlider').value(mm.slide);
+        setSpeed(mm.slide/50);
+        return mm.slide;
       }
     },
 
@@ -169,15 +169,15 @@ if (Meteor.isClient) {
         });
       }
 
-        var arpvol = _.throttle(function(event, ui) {
+        var arpvolf= _.throttle(function(event, ui) {
           console.log("setting arpvol");
             var val = MusicMachine.findOne({});
             MusicMachine.update({ _id: val._id }, {$set: {arpvol: ui.value}});
-        }, 50, { leading: false });
+        }, 30, { leading: false });
 
         if (!this.$('#arpvol').data('uiSlider')) {
             $("#arpvol").slider({
-                slide: arpvol,
+                slide: arpvolf,
                 min: 0,
                 max: 100
             });
@@ -212,10 +212,9 @@ player2.play();
 }
 
 if (Meteor.isServer) {
-//      MusicMachine.remove({});
+      MusicMachine.remove({});
       if (MusicMachine.find().count() === 0) {
-      MusicMachine.insert({slide: 50});
-
+      MusicMachine.insert({slide: 50,arpvol:30});
     }
 
 }
