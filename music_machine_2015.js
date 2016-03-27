@@ -37,7 +37,7 @@ if (Meteor.isClient) {
   Template.playground.helpers({
 
     "startdac": function () {
-
+      console.log("**USER WANTS TO START THE PARTY!!!");
       player1.play();
       player2.play();
       player3.play();
@@ -54,7 +54,7 @@ if (Meteor.isClient) {
 "arpv":  function() {
   var  mm= MusicMachine.findOne();
   if (mm) {
-      Template.instance().$('#arpvol').data('uiSlider').value(mm.arpvol);
+      $('#arpvol').data('uiSlider').value(mm.arpvol);
       setVol("arp", mm.arpvol/50);
       return mm.arpvol;
     }
@@ -63,7 +63,7 @@ if (Meteor.isClient) {
 "arpsp":  function() {
     var mm = MusicMachine.findOne();
     if (mm) {
-        Template.instance().$('#arpspeed').data('uiSlider').value(mm.arpspeed);
+        $('#arpspeed').data('uiSlider').value(mm.arpspeed);
         setSpeed("arp", mm.arpspeed/50);
         return mm.arpspeed;
       }
@@ -72,7 +72,7 @@ if (Meteor.isClient) {
 "cymv":  function() {
       var  mm= MusicMachine.findOne();
       if (mm) {
-          Template.instance().$('#cymvol').data('uiSlider').value(mm.cymvol);
+          $('#cymvol').data('uiSlider').value(mm.cymvol);
           setVol("cym", mm.cymvol/50);
           return mm.cymvol;
         }
@@ -81,7 +81,7 @@ if (Meteor.isClient) {
 "cymsp":  function() {
         var mm = MusicMachine.findOne();
         if (mm) {
-            Template.instance().$('#cymspeed').data('uiSlider').value(mm.cymspeed);
+            $('#cymspeed').data('uiSlider').value(mm.cymspeed);
             setSpeed("cym", mm.cymspeed/50);
             return mm.cymspeed;
           }
@@ -90,7 +90,7 @@ if (Meteor.isClient) {
 "snav":  function() {
           var  mm= MusicMachine.findOne();
           if (mm) {
-              Template.instance().$('#snavol').data('uiSlider').value(mm.snavol);
+              $('#snavol').data('uiSlider').value(mm.snavol);
               setVol("sna", mm.snavol/50);
               return mm.snavol;
             }
@@ -99,7 +99,7 @@ if (Meteor.isClient) {
 "snasp":  function() {
             var mm = MusicMachine.findOne();
             if (mm) {
-                Template.instance().$('#snaspeed').data('uiSlider').value(mm.snaspeed);
+                $('#snaspeed').data('uiSlider').value(mm.snaspeed);
                 setSpeed("sna", mm.snaspeed/50);
                 return mm.snaspeed;
               }
@@ -108,7 +108,7 @@ if (Meteor.isClient) {
 "druv":  function() {
               var  mm= MusicMachine.findOne();
               if (mm) {
-                  Template.instance().$('#druvol').data('uiSlider').value(mm.druvol);
+                  $('#druvol').data('uiSlider').value(mm.druvol);
                   setVol("dru", mm.druvol/50);
                   return mm.druvol;
                 }
@@ -117,7 +117,7 @@ if (Meteor.isClient) {
 "drusp":  function() {
                 var mm = MusicMachine.findOne();
                 if (mm) {
-                    Template.instance().$('#druspeed').data('uiSlider').value(mm.druspeed);
+                    $('#druspeed').data('uiSlider').value(mm.druspeed);
                     setSpeed("dru", mm.druspeed/50);
                     return mm.druspeed;
                   }
@@ -128,7 +128,7 @@ if (Meteor.isClient) {
   console.log("-Setting the bassdrum vol");
   var  mm= MusicMachine.findOne();
   if (mm) {
-      Template.instance().$('#b01vol').data('uiSlider').value(mm.b01vol);
+      $('#b01vol').data('uiSlider').value(mm.b01vol);
       setVol("b01", mm.b01vol/50);
       return mm.b01vol;
     }
@@ -138,7 +138,7 @@ if (Meteor.isClient) {
     console.log("-Setting the bassdrum speed");
     var mm = MusicMachine.findOne();
     if (mm) {
-        Template.instance().$('#b01speed').data('uiSlider').value(mm.b01speed);
+        $('#b01speed').data('uiSlider').value(mm.b01speed);
         setSpeed("b01", mm.b01speed/50);
         return mm.b01speed;
       }
@@ -147,7 +147,7 @@ if (Meteor.isClient) {
 "b24v":  function() {
       var  mm= MusicMachine.findOne();
       if (mm) {
-          Template.instance().$('#b24vol').data('uiSlider').value(mm.b24vol);
+          $('#b24vol').data('uiSlider').value(mm.b24vol);
           setVol("b24", mm.b24vol/50);
           return mm.b24vol;
         }
@@ -156,7 +156,7 @@ if (Meteor.isClient) {
 "b24sp":  function() {
         var mm = MusicMachine.findOne();
         if (mm) {
-            Template.instance().$('#b24speed').data('uiSlider').value(mm.b24speed);
+            $('#b24speed').data('uiSlider').value(mm.b24speed);
             setSpeed("b24", mm.b24speed/50);
             return mm.b24speed;
           }
@@ -165,7 +165,7 @@ if (Meteor.isClient) {
 "b32v":  function() {
           var  mm= MusicMachine.findOne();
           if (mm) {
-              Template.instance().$('#b32vol').data('uiSlider').value(mm.b32vol);
+              $('#b32vol').data('uiSlider').value(mm.b32vol);
               setVol("b32", mm.b32vol/500);
               return mm.b32vol;
             }
@@ -174,7 +174,7 @@ if (Meteor.isClient) {
 "b32sp":  function() {
             var mm = MusicMachine.findOne();
             if (mm) {
-                Template.instance().$('#b32speed').data('uiSlider').value(mm.b32speed);
+                $('#b32speed').data('uiSlider').value(mm.b32speed);
                 setSpeed("b32", mm.b32speed/180);
                 return mm.b32speed;
               }
@@ -183,7 +183,7 @@ if (Meteor.isClient) {
 "hihv":  function() {
               var  mm= MusicMachine.findOne();
               if (mm) {
-                  Template.instance().$('#hihvol').data('uiSlider').value(mm.hihvol);
+                  $('#hihvol').data('uiSlider').value(mm.hihvol);
                   setVol("hih", mm.hihvol/30);
                   return mm.hihvol;
                 }
@@ -192,7 +192,7 @@ if (Meteor.isClient) {
 "hihsp":  function() {
                 var mm = MusicMachine.findOne();
                 if (mm) {
-                    Template.instance().$('#hihspeed').data('uiSlider').value(mm.hihspeed);
+                    $('#hihspeed').data('uiSlider').value(mm.hihspeed);
                     setSpeed("hih", mm.hihspeed/50);
                     return mm.hihspeed;
                   }
@@ -201,7 +201,7 @@ if (Meteor.isClient) {
 "winv":  function() {
               var  mm= MusicMachine.findOne();
               if (mm) {
-                  Template.instance().$('#winvol').data('uiSlider').value(mm.winvol);
+                  $('#winvol').data('uiSlider').value(mm.winvol);
                   setVol("win", mm.winvol/9);
                   return mm.winvol;
                 }
@@ -210,7 +210,7 @@ if (Meteor.isClient) {
 "winsp":  function() {
                 var mm = MusicMachine.findOne();
                 if (mm) {
-                    Template.instance().$('#winspeed').data('uiSlider').value(mm.winspeed);
+                    $('#winspeed').data('uiSlider').value(mm.winspeed);
                     setSpeed("win", mm.winspeed/50);
                     return mm.winspeed;
                   }
@@ -225,8 +225,21 @@ if (Meteor.isClient) {
      "click button.startButton": function () {
       Session.set('startdac', 1);
       var val = MusicMachine.findOne({});
+
       MusicMachine.update({ _id: val._id }, {$set: {start: 1}});
-    },
+ 
+      console.log("Refresh the party!!!!!");
+      player1.play();
+      player2.play();
+      player3.play();
+      player4.play();
+      player5.play();
+      player6.play();
+      player7.play();
+      player8.play();
+      player9.play();
+ 
+   },
 
 
   });
@@ -549,7 +562,8 @@ var b24volf= _.throttle(function(event, ui) {
 }
 
 if (Meteor.isServer) {
-    // (remove comment if you want to reset db)  MusicMachine.remove({});
+    // (remove comment if you want to reset db)  
+MusicMachine.remove({});
       if (MusicMachine.find().count() === 0) {
       MusicMachine.insert({
         cymvol:50,cymspeed:50,
