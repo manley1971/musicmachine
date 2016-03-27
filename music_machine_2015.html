@@ -48,29 +48,73 @@
 
 <template name="playground">
 
-<br><br><br>
-<!-- Remember - if you want to control functions globaly, don't declare them as var. Just name them. -->
 
+<!-- Remember - if you want to control functions globaly, don't declare them as var. Just name them. -->
+<br>
 <button class="startButton">DAC</button><br><br>
 
-	<div class="one">
-<br>ARP speed and volume (to remove track from mix just set volume to 0)
+<div class="one">
+ARP speed and volume (to remove from mix set volume to 0)
 <div class= "c"><div class = "s" id="arpspeed"></div></div>
 <div class="c"><div class = "s" id="arpvol"></div></div>
 </div>
 
-<br>Track 2             <button class="myButton3">ON</button>
- <button class="myButton4">OFF</button>
-<br>Track 3             <button class="myButton5">ON</button>
- <button class="myButton6">OFF</button>
+<div class="one">
+Cymbal speed and volume (to remove from mix set volume to 0)
+<div class= "c"><div class = "s" id="cymspeed"></div></div>
+<div class="c"><div class = "s" id="cymvol"></div></div>
+</div>
+
+<div class="one">
+Drums speed and volume (to remove from mix set volume to 0)
+<div class= "c"><div class = "s" id="druspeed"></div></div>
+<div class="c"><div class = "s" id="druvol"></div></div>
+</div>
+
+<div class="one">
+Snaredrums speed and volume (to remove from mix set volume to 0)
+<div class= "c"><div class = "s" id="snaspeed"></div></div>
+<div class="c"><div class = "s" id="snavol"></div></div>
+</div>
+
+
+
+<div class="one">
+basedrum speed and volume (to remove from mix set volume to 0)
+<div class= "c"><div class = "s" id="b01speed"></div></div>
+<div class="c"><div class = "s" id="b01vol"></div></div>
+</div>
+
+<div class="one">
+24bit bass speed and volume (to remove from mix set volume to 0)
+<div class= "c"><div class = "s" id="b24speed"></div></div>
+<div class="c"><div class = "s" id="b24vol"></div></div>
+</div>
+
+<div class="one">
+32bit bass speed and volume (to remove from mix set volume to 0)
+<div class= "c"><div class = "s" id="b32speed"></div></div>
+<div class="c"><div class = "s" id="b32vol"></div></div>
+</div>
+
+<div class="one">
+Hihat speed and volume (to remove from mix set volume to 0)
+<div class= "c"><div class = "s" id="hihspeed"></div></div>
+<div class="c"><div class = "s" id="hihvol"></div></div>
+</div>
 
  <br>
 
 
- <h2> {{startdac}} {{drums}} {{bass}}  </h2>
+ <h2> {{startdac}}
+   {{arpsp}} {{arpv}} {{cymsp}} {{cymv}}
+   {{drusp}} {{druv}} {{snasp}} {{snav}}
+   {{b01}} {{b01v}} {{b24sp}} {{b24v}}
+   {{b32sp}} {{b32v}} {{hihsp}} {{hihv}}
+ </h2>
 <br>
   <br>
-  Current Speed = {{sliderVal1}} {{sliderVal2}}
+
 
 
 </template>
