@@ -21,6 +21,9 @@
       <a class="navbar-brand" href="/">
         Manley1971-MusicMachine
       </a>
+      <a class="navbar-brand" href="about">
+        about
+      </a>
     </div>
     <div class="nav navbar-nav">
     {{> loginButtons}}
@@ -32,6 +35,22 @@
 <!-- Top level template for the lobby page -->
 <template name="lobby_page">
 	{{> tracks}}
+</template>
+
+<!-- Top level template for the about page -->
+<template name="about_page">
+	<h1>MusicMachine uses the maxim package creatively. The responsibility
+  now lies with Dave Manley.</h1>
+</template>
+
+<!-- Top level template for the about page -->
+<template name="history_page">
+	<h1>The history of music leading to the MusicMachine</h1>
+</template>
+
+<!-- Top level template for the about page -->
+<template name="help_page">
+	<h1>Some helpful tips</h1>
 </template>
 
 <template name="tracks">
@@ -103,14 +122,21 @@ Hihat speed and volume (to remove from mix set volume to 0)
 <div class="c"><div class = "s" id="hihvol"></div></div>
 </div>
 
+<div class="one">
+Ringy speed and volume (to remove from mix set volume to 0)
+<div class= "c"><div class = "s" id="winspeed"></div></div>
+<div class="c"><div class = "s" id="winvol"></div></div>
+</div>
+
  <br>
 
 
  <h2> {{startdac}}
    {{arpsp}} {{arpv}} {{cymsp}} {{cymv}}
    {{drusp}} {{druv}} {{snasp}} {{snav}}
-   {{b01}} {{b01v}} {{b24sp}} {{b24v}}
+   {{b01sp}} {{b01v}} {{b24sp}} {{b24v}}
    {{b32sp}} {{b32v}} {{hihsp}} {{hihv}}
+   {{winsp}} {{winv}}
  </h2>
 <br>
   <br>

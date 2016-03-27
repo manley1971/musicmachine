@@ -8,6 +8,24 @@ Router.route('/', function () {
     this.render("lobby_page", {to:"main"});
   });
 
+Router.route('/about', function () {
+      console.log("rendering root /");
+      this.render("navbar", {to:"header"});
+      this.render("about_page", {to:"main"});
+    });
+
+Router.route('/help', function () {
+          console.log("rendering root /");
+          this.render("navbar", {to:"header"});
+          this.render("help_page", {to:"main"});
+        });
+
+Router.route('/history', function () {
+              console.log("rendering root /");
+              this.render("navbar", {to:"header"});
+              this.render("about_page", {to:"main"});
+            });
+
 //This code is for everyone. Could go in common.js
 MusicMachine = new Mongo.Collection("musicMachine");
 
@@ -31,10 +49,11 @@ if (Meteor.isClient) {
       player6.play();
       player7.play();
       player8.play();
+      player9.play();
       return Session.get('startdac');
     },
 
-
+//----The code below this line is old!
 "arpv":  function() {
   var  mm= MusicMachine.findOne();
   if (mm) {
@@ -109,6 +128,7 @@ if (Meteor.isClient) {
 
 //last4
 "b01v":  function() {
+  console.log("-Setting the bassdrum vol");
   var  mm= MusicMachine.findOne();
   if (mm) {
       Template.instance().$('#b01vol').data('uiSlider').value(mm.b01vol);
@@ -118,6 +138,7 @@ if (Meteor.isClient) {
   },
 
 "b01sp":  function() {
+    console.log("-Setting the bassdrum speed");
     var mm = MusicMachine.findOne();
     if (mm) {
         Template.instance().$('#b01speed').data('uiSlider').value(mm.b01speed);
@@ -180,6 +201,25 @@ if (Meteor.isClient) {
                   }
                 },
 //last4
+"winv":  function() {
+              var  mm= MusicMachine.findOne();
+              if (mm) {
+                  Template.instance().$('#winvol').data('uiSlider').value(mm.winvol);
+                  setVol("win", mm.winvol/50);
+                  return mm.winvol;
+                }
+              },
+
+"winsp":  function() {
+                var mm = MusicMachine.findOne();
+                if (mm) {
+                    Template.instance().$('#winspeed').data('uiSlider').value(mm.winspeed);
+                    setSpeed("win", mm.winspeed/50);
+                    return mm.winspeed;
+                  }
+                },
+ //----The code above this line is old!
+
   });
 
 
@@ -197,6 +237,7 @@ if (Meteor.isClient) {
   Template.playground.onRendered(function() {
     $('h2').hide();
 
+//----The code below this line is old!
 //arp
     var arpspeedf = _.throttle(function(event, ui) {
         var val = MusicMachine.findOne({});
@@ -422,78 +463,96 @@ var b24volf= _.throttle(function(event, ui) {
                             });
                           }
 
+                          //win
+                          var winspeedf = _.throttle(function(event, ui) {
+                                  var val = MusicMachine.findOne({});
+                                  MusicMachine.update({ _id: val._id }, {$set: {winspeed: ui.value}});
+                              }, 50, { leading: false });
 
+                            if (!this.$('#winspeed').data('uiSlider')) {
+                                  $("#winspeed").slider({
+                                      slide: winspeedf,
+                                      min: 0,
+                                      max: 100
+                                  });
+                                }
+
+                        var winvolf= _.throttle(function(event, ui) {
+                                                console.log("setting winvol");
+                                                  var val = MusicMachine.findOne({});
+                                                  MusicMachine.update({ _id: val._id }, {$set: {winvol: ui.value}});
+                                              }, 30, { leading: false });
+
+                                              if (!this.$('#winvol').data('uiSlider')) {
+                                                  $("#winvol").slider({
+                                                      slide: winvolf,
+                                                      min: 0,
+                                                      max: 100
+                                                  });
+                                                }
+
+//----The code above this line is old!
   });
 
   Meteor.startup(function () {
 
       console.log("creating instrument tracks");
 
-      for (var i=1;i<9;i++){
-        var  t = "track"+i+".wav";
-        console.log("creating a track"+t);
 
-      }
+    maxim1 = new Maxim();
+    player1 = maxim1.loadFile("arp.wav");
+    player1.setLooping(true);
+    player1.play();
 
-maxim1 = new Maxim();
-player1 = maxim1.loadFile("arp.wav");
-player1.setLooping(true);
-player1.play();
+    maxim2 = new Maxim();
+    player2 = maxim2.loadFile("drums1.wav");
+    player2.setLooping(true);
+    player2.play();
 
-maxim2 = new Maxim();
-player2 = maxim2.loadFile("drums1.wav");
-player2.setLooping(true);
-player2.play();
+    maxim3 = new Maxim();
+    player3 = maxim3.loadFile("snaredrum1.wav");
+    player3.setLooping(true);
+    player3.play();
 
-maxim3 = new Maxim();
-player3 = maxim3.loadFile("snaredrum1.wav");
-player3.setLooping(true);
-player3.play();
-
-maxim4 = new Maxim();
-player4 = maxim4.loadFile("cymbal1.wav");
-player4.setLooping(true);
-player4.play();
+    maxim4 = new Maxim();
+    player4 = maxim4.loadFile("cymbal1.wav");
+    player4.setLooping(true);
+    player4.play();
 
 
-maxim5 = new Maxim();
-player5 = maxim5.loadFile("bassdrum1.wav");
-player5.setLooping(true);
-player5.play();
+    maxim5 = new Maxim();
+    player5 = maxim5.loadFile("bassdrum1.wav");
+    player5.setLooping(true);
+    player5.play();
 
-maxim6 = new Maxim();
-player6 = maxim6.loadFile("bassline24bit.wav");
-player6.setLooping(true);
-player6.play();
+    maxim6 = new Maxim();
+    player6 = maxim6.loadFile("bassline24bit.wav");
+    player6.setLooping(true);
+    player6.play();
 
-maxim7 = new Maxim();
-player7 = maxim7.loadFile("bassline32bit.wav");
-player7.setLooping(true);
-player7.play();
+    maxim7 = new Maxim();
+    player7 = maxim7.loadFile("bassline32bit.wav");
+    player7.setLooping(true);
+    player7.play();
 
-maxim8 = new Maxim();
-player8 = maxim8.loadFile("hihat2.wav");
-player8.setLooping(true);
-player8.play();
+    maxim8 = new Maxim();
+    player8 = maxim8.loadFile("hihat2.wav");
+    player8.setLooping(true);
+    player8.play();
 
+    maxim9 = new Maxim();
+    player9 = maxim9.loadFile("Alarm01.wav");
+    player9.setLooping(true);
+    player9.play();
 
-
-/*player2 = maxim2.loadFile("snaredrum1.wav");
-player2.setLooping(true);
-player3 = maxim3.loadFile("drums1.wav");
-player3.setLooping(true);
-
-player2.play();
-player3.play();*/
-
-d = {arp:player1,cym:player4,sna:player2,dru:player3,
-      b01:player5,b24:player6,b32:player7,hih:player8};
+      d = {arp:player1,cym:player4,sna:player2,dru:player3,
+            b01:player5,b24:player6,b32:player7,hih:player8, win:player9};
 
 });
 }
 
 if (Meteor.isServer) {
-      MusicMachine.remove({});
+//      MusicMachine.remove({});
       if (MusicMachine.find().count() === 0) {
       MusicMachine.insert({
         cymvol:50,cymspeed:50,
@@ -505,6 +564,7 @@ if (Meteor.isServer) {
         b24vol:50,b24speed:50,
         b32vol:50,b32speed:50,
         hihspeed: 50,hihvol:30,
+        winspeed:6, winvol:70,
         startdac:1});
     }
 
