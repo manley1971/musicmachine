@@ -18,8 +18,14 @@
 <nav class="navbar navbar-default">
   <div class="container-fluid">
     <div class="navbar-header">
-      <a class="navbar-brand" href="/">
-        Manley1971-MusicMachine
+      <a class="navbar-brand" href="/"> 
+       Manley1971-MusicMachine
+	</a>
+        <a class="navbar-brand" href="history">
+        history
+      </a>
+      <a class="navbar-brand" href="help">
+       help 
       </a>
       <a class="navbar-brand" href="about">
         about
@@ -41,16 +47,52 @@
 <template name="about_page">
 	<h1>MusicMachine uses the maxim package creatively. The responsibility
   now lies with Dave Manley.</h1>
+
+<ul class="list-group">
+<li class="list-group-item" > The idea with the music machine is to make an application where different users in different locations can interactively make music.</li>
+<li class="list-group-item"> The main code is in the playground.js file and:
+//playground.js
+
+//Here is the real code that controls the actual sliders. It assumes all the music
+//tracks are in the "d" array that stores all the data.
+
+setVol = function(track, v) {
+  console.log(" setting vol"+v + " for "+ track);
+  d[track].volume(v);
+}
+setSpeed = function(track, speed) {
+  console.log("setting speed"+speed+" for "+track);
+  d[track].speed(speed);
+}</li>
+<li class="list-group-item">For some freaky effects, slow the hihat and the ringtone down and enjoy!</li>
+</ul>
+
 </template>
 
 <!-- Top level template for the about page -->
 <template name="history_page">
-	<h1>The history of music leading to the MusicMachine</h1>
+	<h1>The history of music leading to the MusicMachine according to Wikipedia</h1>
+<blockquote cite="https://en.wikipedia.org/wiki/History_of_music">
+
+Music is found in every known culture, past and present, varying widely between times and places. Since all people of the world, including the most isolated tribal groups, have a form of music, it may be concluded that music is likely to have been present in the ancestral population prior to the dispersal of humans around the world. Consequently, music may have been in existence for at least 55,000 years and the first music may have been invented in Africa and then evolved to become a fundamental constituent of human life.[1][2]
+
+A culture's music is influenced by all other aspects of that culture, including social and economic organization and experience, climate, and access to technology. The emotions and ideas that music expresses, the situations in which music is played and listened to, and the attitudes toward music players and composers all vary between regions and periods. "Music history" is the distinct subfield of musicology and history which studies music (particularly Western art music) from a chronological perspective.
+</blockquote>
+
 </template>
 
 <!-- Top level template for the about page -->
 <template name="help_page">
-	<h1>Some helpful tips</h1>
+	<h1>Some helpful tips on what is trying to be accomplished:</h1>
+<ul class="list-group">
+<li class="list-group-item">Clear navigation allowing the user to move between pages and locate relevant information</li>
+<li class="list-group-item">Consistent style across the pages through the use of CSS</li>
+<li class="list-group-item">Responsive layout where the layout changes depending on the size of the browser window</li>
+<li class="list-group-item">Use of Bootstrap</li>
+<li class="list-group-item">Clearly stated purpose for each page</li>
+<li class="list-group-item">Clear landing page</li>
+<li class="list-group-item">Nine different tracks of audio and volume and speed linked to each track</li>
+</ul>
 </template>
 
 <template name="tracks">
@@ -70,7 +112,7 @@
 
 <!-- Remember - if you want to control functions globaly, don't declare them as var. Just name them. -->
 <br>
-<button class="startButton">DAC</button><br><br>
+<button class="startButton">Start the Music</button><br><br>
 
 <div class="one">
 ARP speed and volume (to remove from mix set volume to 0)
@@ -99,7 +141,7 @@ Snaredrums speed and volume (to remove from mix set volume to 0)
 
 
 <div class="one">
-basedrum speed and volume (to remove from mix set volume to 0)
+bassdrum speed and volume (to remove from mix set volume to 0)
 <div class= "c"><div class = "s" id="b01speed"></div></div>
 <div class="c"><div class = "s" id="b01vol"></div></div>
 </div>

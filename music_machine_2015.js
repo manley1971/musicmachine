@@ -9,25 +9,22 @@ Router.route('/', function () {
   });
 
 Router.route('/about', function () {
-      console.log("rendering root /");
       this.render("navbar", {to:"header"});
       this.render("about_page", {to:"main"});
     });
 
 Router.route('/help', function () {
-          console.log("rendering root /");
           this.render("navbar", {to:"header"});
           this.render("help_page", {to:"main"});
         });
 
 Router.route('/history', function () {
-              console.log("rendering root /");
               this.render("navbar", {to:"header"});
-              this.render("about_page", {to:"main"});
+              this.render("history_page", {to:"main"});
             });
 
 //This code is for everyone. Could go in common.js
-MusicMachine = new Mongo.Collection("musicMachine");
+MusicMachine = new Mongo.Collection("ManleyMusicMachine");
 
 
 if (Meteor.isClient) {
@@ -50,7 +47,7 @@ if (Meteor.isClient) {
       player7.play();
       player8.play();
       player9.play();
-      return Session.get('startdac');
+      return true;
     },
 
 //----The code below this line is old!
@@ -169,7 +166,7 @@ if (Meteor.isClient) {
           var  mm= MusicMachine.findOne();
           if (mm) {
               Template.instance().$('#b32vol').data('uiSlider').value(mm.b32vol);
-              setVol("b32", mm.b32vol/50);
+              setVol("b32", mm.b32vol/500);
               return mm.b32vol;
             }
           },
@@ -178,7 +175,7 @@ if (Meteor.isClient) {
             var mm = MusicMachine.findOne();
             if (mm) {
                 Template.instance().$('#b32speed').data('uiSlider').value(mm.b32speed);
-                setSpeed("b32", mm.b32speed/50);
+                setSpeed("b32", mm.b32speed/180);
                 return mm.b32speed;
               }
             },
@@ -187,7 +184,7 @@ if (Meteor.isClient) {
               var  mm= MusicMachine.findOne();
               if (mm) {
                   Template.instance().$('#hihvol').data('uiSlider').value(mm.hihvol);
-                  setVol("hih", mm.hihvol/50);
+                  setVol("hih", mm.hihvol/30);
                   return mm.hihvol;
                 }
               },
@@ -205,7 +202,7 @@ if (Meteor.isClient) {
               var  mm= MusicMachine.findOne();
               if (mm) {
                   Template.instance().$('#winvol').data('uiSlider').value(mm.winvol);
-                  setVol("win", mm.winvol/50);
+                  setVol("win", mm.winvol/9);
                   return mm.winvol;
                 }
               },
@@ -467,7 +464,7 @@ var b24volf= _.throttle(function(event, ui) {
                           var winspeedf = _.throttle(function(event, ui) {
                                   var val = MusicMachine.findOne({});
                                   MusicMachine.update({ _id: val._id }, {$set: {winspeed: ui.value}});
-                              }, 50, { leading: false });
+                              }, 888888880, { leading: false });
 
                             if (!this.$('#winspeed').data('uiSlider')) {
                                   $("#winspeed").slider({
@@ -552,19 +549,19 @@ var b24volf= _.throttle(function(event, ui) {
 }
 
 if (Meteor.isServer) {
-//      MusicMachine.remove({});
+    // (remove comment if you want to reset db)  MusicMachine.remove({});
       if (MusicMachine.find().count() === 0) {
       MusicMachine.insert({
         cymvol:50,cymspeed:50,
-        druvol:50,druspeed:50,
-        snavol:50,snaspeed:50,
-        arpspeed: 50,arpvol:30,
+        druvol:20,druspeed:50,
+        snavol:30,snaspeed:50,
+        arpspeed: 50,arpvol:60,
 
-        b01vol:50,b01speed:50,
-        b24vol:50,b24speed:50,
-        b32vol:50,b32speed:50,
+        b01vol:10,b01speed:50,
+        b24vol:5,b24speed:50,
+        b32vol:12,b32speed:50,
         hihspeed: 50,hihvol:30,
-        winspeed:6, winvol:70,
+        winspeed:6, winvol:700,
         startdac:1});
     }
 
