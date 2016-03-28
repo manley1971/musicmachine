@@ -1,3 +1,6 @@
+
+//Routes recognized by any browser or iron router code
+
 Router.configure({
     layoutTemplate: 'ApplicationLayout'
   });
@@ -23,7 +26,7 @@ Router.route('/history', function () {
               this.render("history_page", {to:"main"});
             });
 
-//This code is for everyone. Could go in common.js
+//This code creates the storage for db values
 MusicMachine = new Mongo.Collection("ManleyMusicMachine");
 
 
@@ -33,9 +36,8 @@ if (Meteor.isClient) {
 
 });
 
-
+//Basic UI code
   Template.playground.helpers({
-
     "startdac": function () {
       console.log("**USER WANTS TO START THE PARTY!!!");
       player1.play();
@@ -47,10 +49,11 @@ if (Meteor.isClient) {
       player7.play();
       player8.play();
       player9.play();
+
       return true;
     },
 
-//----The code below this line is old!
+//----nb: The code below this line is old!
 "arpv":  function() {
   var  mm= MusicMachine.findOne();
   if (mm) {
@@ -62,7 +65,7 @@ if (Meteor.isClient) {
 
 "arpsp":  function() {
     var mm = MusicMachine.findOne();
-    if (mm) {
+    if (mm && ($('#arpspeed')) && ($('#arpspeed').data('uiSlider'))) {
         $('#arpspeed').data('uiSlider').value(mm.arpspeed);
         setSpeed("arp", mm.arpspeed/50);
         return mm.arpspeed;
@@ -73,7 +76,7 @@ if (Meteor.isClient) {
       var  mm= MusicMachine.findOne();
       if (mm) {
           $('#cymvol').data('uiSlider').value(mm.cymvol);
-          setVol("cym", mm.cymvol/50);
+          setVol("cym", mm.cymvol/3);
           return mm.cymvol;
         }
       },
@@ -202,7 +205,7 @@ if (Meteor.isClient) {
               var  mm= MusicMachine.findOne();
               if (mm) {
                   $('#winvol').data('uiSlider').value(mm.winvol);
-                  setVol("win", mm.winvol/9);
+                  setVol("win", mm.winvol/2);
                   return mm.winvol;
                 }
               },
@@ -227,7 +230,7 @@ if (Meteor.isClient) {
       var val = MusicMachine.findOne({});
 
       MusicMachine.update({ _id: val._id }, {$set: {start: 1}});
- 
+
       console.log("Refresh the party!!!!!");
       player1.play();
       player2.play();
@@ -238,7 +241,7 @@ if (Meteor.isClient) {
       player7.play();
       player8.play();
       player9.play();
- 
+      $( ".one" ).effect( "shake" );
    },
 
 
@@ -249,6 +252,8 @@ if (Meteor.isClient) {
 
 //----The code below this line is old!
 //arp
+
+    var  mm= MusicMachine.findOne();
     var arpspeedf = _.throttle(function(event, ui) {
         var val = MusicMachine.findOne({});
         MusicMachine.update({ _id: val._id }, {$set: {arpspeed: ui.value}});
@@ -258,7 +263,8 @@ if (Meteor.isClient) {
         $("#arpspeed").slider({
             slide: arpspeedf,
             min: 0,
-            max: 100
+            max: 100,
+            value:mm?mm.arpspeed:40
         });
       }
 
@@ -272,7 +278,8 @@ if (Meteor.isClient) {
             $("#arpvol").slider({
                 slide: arpvolf,
                 min: 0,
-                max: 100
+                max: 100,
+                value:mm?mm.arpvol:40
             });
           }
 
@@ -286,7 +293,8 @@ if (!this.$('#cymspeed').data('uiSlider')) {
     $("#cymspeed").slider({
         slide: cymspeedf,
         min: 0,
-        max: 100
+        max: 100,
+        value:mm?mm.cymspeed:40
     });
   }
 
@@ -300,7 +308,8 @@ var cymvolf= _.throttle(function(event, ui) {
         $("#cymvol").slider({
             slide: cymvolf,
             min: 0,
-            max: 100
+            max: 100,
+            value:mm?mm.cymvol:40
         });
       }
 
@@ -314,7 +323,8 @@ var cymvolf= _.throttle(function(event, ui) {
               $("#druspeed").slider({
                   slide: druspeedf,
                   min: 0,
-                  max: 100
+                  max: 100,
+                  value:mm?mm.druspeed:40
               });
             }
 
@@ -328,7 +338,8 @@ var cymvolf= _.throttle(function(event, ui) {
                   $("#druvol").slider({
                       slide: druvolf,
                       min: 0,
-                      max: 100
+                      max: 100,
+                      value:mm?mm.druvol:40
                   });
                 }
 
@@ -342,7 +353,8 @@ var cymvolf= _.throttle(function(event, ui) {
             $("#snaspeed").slider({
                 slide: snaspeedf,
                 min: 0,
-                max: 100
+                max: 100,
+                value:mm?mm.snaspeed:40
             });
           }
 
@@ -356,7 +368,8 @@ var cymvolf= _.throttle(function(event, ui) {
                             $("#snavol").slider({
                                 slide: snavolf,
                                 min: 0,
-                                max: 100
+                                max: 100,
+                                value:mm?mm.snavol:40
                             });
                           }
 
@@ -371,7 +384,9 @@ var cymvolf= _.throttle(function(event, ui) {
         $("#b01speed").slider({
             slide: b01speedf,
             min: 0,
-            max: 100
+            max: 100,
+
+            value:mm?mm.b01speed:40
         });
       }
 
@@ -385,7 +400,8 @@ var cymvolf= _.throttle(function(event, ui) {
             $("#b01vol").slider({
                 slide: b01volf,
                 min: 0,
-                max: 100
+                max: 100,
+                value:mm?mm.b01vol:40
             });
           }
 
@@ -399,7 +415,8 @@ if (!this.$('#b24speed').data('uiSlider')) {
     $("#b24speed").slider({
         slide: b24speedf,
         min: 0,
-        max: 100
+        max: 100,
+        value:mm?mm.b24speed:40
     });
   }
 
@@ -413,7 +430,8 @@ var b24volf= _.throttle(function(event, ui) {
         $("#b24vol").slider({
             slide: b24volf,
             min: 0,
-            max: 100
+            max: 100,
+            value:mm?mm.b24vol:40
         });
       }
 
@@ -427,7 +445,8 @@ var b24volf= _.throttle(function(event, ui) {
               $("#b32speed").slider({
                   slide: b32speedf,
                   min: 0,
-                  max: 100
+                  max: 100,
+                  value:mm?mm.b32speed:40
               });
             }
 
@@ -441,7 +460,8 @@ var b24volf= _.throttle(function(event, ui) {
                   $("#b32vol").slider({
                       slide: b32volf,
                       min: 0,
-                      max: 100
+                      max: 100,
+                      value:mm?mm.b32vol:40
                   });
                 }
 
@@ -455,7 +475,8 @@ var b24volf= _.throttle(function(event, ui) {
             $("#hihspeed").slider({
                 slide: hihspeedf,
                 min: 0,
-                max: 100
+                max: 100,
+                value:mm?mm.hihspeed:40
             });
           }
 
@@ -469,21 +490,23 @@ var b24volf= _.throttle(function(event, ui) {
                             $("#hihvol").slider({
                                 slide: hihvolf,
                                 min: 0,
-                                max: 100
+                                max: 100,
+                                value:mm?mm.hihvol:40
                             });
                           }
 
                           //win
-                          var winspeedf = _.throttle(function(event, ui) {
+ var winspeedf = _.throttle(function(event, ui) {
                                   var val = MusicMachine.findOne({});
                                   MusicMachine.update({ _id: val._id }, {$set: {winspeed: ui.value}});
-                              }, 888888880, { leading: false });
+                              }, 80, { leading: false });
 
                             if (!this.$('#winspeed').data('uiSlider')) {
                                   $("#winspeed").slider({
                                       slide: winspeedf,
                                       min: 0,
-                                      max: 100
+                                      max: 100,
+                                      value:mm?mm.winspeed:40
                                   });
                                 }
 
@@ -497,11 +520,13 @@ var b24volf= _.throttle(function(event, ui) {
                                                   $("#winvol").slider({
                                                       slide: winvolf,
                                                       min: 0,
-                                                      max: 100
+                                                      max: 100,
+                                                      value:mm?mm.winvol:40
                                                   });
                                                 }
 
 //----The code above this line is old!
+
   });
 
   Meteor.startup(function () {
@@ -562,8 +587,8 @@ var b24volf= _.throttle(function(event, ui) {
 }
 
 if (Meteor.isServer) {
-    // (remove comment if you want to reset db)  
-MusicMachine.remove({});
+    // (remove comment if you want to reset db)
+    MusicMachine.remove({});
       if (MusicMachine.find().count() === 0) {
       MusicMachine.insert({
         cymvol:50,cymspeed:50,
@@ -575,7 +600,7 @@ MusicMachine.remove({});
         b24vol:5,b24speed:50,
         b32vol:12,b32speed:50,
         hihspeed: 50,hihvol:30,
-        winspeed:6, winvol:700,
+        winspeed:10, winvol:34,
         startdac:1});
     }
 
